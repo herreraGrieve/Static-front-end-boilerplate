@@ -1,0 +1,102 @@
+//===========================
+//       SIZE MIXIN
+//===========================
+
+@mixin size($width, $height: $width) {
+      width: $width;
+      height: $height;
+}
+
+
+//===========================
+//     POSITION MIXIN
+//===========================
+
+//The same used in stylus, written in sass by Hugo Giraudel
+
+@mixin _position($position, $args) {
+
+  @each $o in top right bottom left {
+    $i: index($args, $o);
+    @if $i
+    and $i + 1 <= length($args) 
+    and (type-of( nth($args, $i + 1) ) == number
+    or nth($args, $i + 1) == initial
+    or nth($args, $i + 1) == inherit ) {
+      #{$o}: nth($args, $i + 1);
+    }
+  }
+  
+  position: $position;
+}
+
+/**
+ * Mixin triplet calling the private mixin
+ * with the appropriate position value
+ */
+@mixin absolute($args) {
+  @include _position(absolute, $args);
+}
+
+@mixin relative($args) {
+  @include _position(relative, $args);
+}
+
+@mixin fixed($args) {
+  @include _position(fixed,    $args);
+}
+
+@mixin prefix($property, $value, $vendors: webkit moz ms o) {
+      @if $vendors {
+        @each $vendor in $vendors {
+          #{"-" + $vendor + "-" + $property}: #{$value};
+        }
+      }
+      #{$property}: #{$value};
+}
+
+//===========================
+//      PIE-CLEARFIX
+//===========================
+
+@mixin pie-clearfix(){
+  &:after{
+    content: "";
+    display: table;
+    clear: both
+  }
+}
+
+//===========================
+//      SIMPLE SVG SPRITE
+//===========================
+
+  %spriteSvg{
+    background-repeat: no-repeat;
+    background-image: url('/img/mainSprite.svg')
+  }
+
+@mixin svg-sprite($xPosition,$yPosition,$unitGridSize:$globalGridSize,$extend:'extend',$image:'mainSprite',$nColumns:$globalNcolumns){
+  $widthOfSprite: ($unitGridSize * $nColumns);
+
+  @if $unitGridSize == $globalGridSize{
+    background-position: (($xPosition - 1) * -$unitGridSize) (($yPosition - 1) * -$unitGridSize)
+  }
+  @else{
+    background-position: (($xPosition - 1) * -$unitGridSize) (($yPosition - 1 ) * -$unitGridSize);
+    background-size: $widthOfSprite
+  }
+  @if $extend == 'no-extend'{
+  }
+  @else if $extend == 'extend'{
+    @extend %spriteSvg
+
+  }
+}
+
+
+@mixin translate-center(){
+  @include absolute(top 50% left 50%);
+  transform: translate(-50%,-50%)
+}
+

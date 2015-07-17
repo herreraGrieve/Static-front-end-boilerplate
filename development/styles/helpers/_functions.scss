@@ -1,0 +1,20 @@
+@function toEm($size,$font-size){
+	@return ($size / $font-size) + em
+}
+
+@function toRem($size,$font-size){
+	@return ($size / $font-size) + rem
+}
+
+@function toPx($size,$font-size){
+	@return ($size * $font-size) + px
+}
+
+@function palette($palette, $tone: 'base'){
+	@return map-get(map-get($palettes, $palette), $tone);
+}
+
+
+@function rhythm($grid-spaces){
+	@return $magic-number * $grid-spaces
+}
