@@ -13,8 +13,6 @@
 //		   SUSY
 //========================
 
-//Susy Grids kick ass
-
 $susy: (
   columns: 	4,
   gutters: 	1/4,
@@ -31,7 +29,7 @@ $susy: (
 $palettes: (
 	cream: (
 		light: 	rgb(250,250,250),
-		base: 	#EFEDE1,////#e9e7dd
+		base: 	#EFEDE1,
 	),
 	gray: (
 		light: 	rgb(250,250,250),
@@ -109,3 +107,6 @@ $ms-range:
 	1.333  $big-width
 	;
 
+//========================
+//		   SVG MIXIN
+//========================

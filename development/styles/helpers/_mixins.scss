@@ -71,12 +71,28 @@
 //      SIMPLE SVG SPRITE
 //===========================
 
-  %spriteSvg{
-    background-repeat: no-repeat;
-    background-image: url('/img/mainSprite.svg')
-  }
+%spriteSvg{
+  background-repeat: no-repeat;
+  background-image: url('/img/mainSprite.svg')
+}
 
-@mixin svg-sprite($xPosition,$yPosition,$unitGridSize:$globalGridSize,$extend:'extend',$image:'mainSprite',$nColumns:$globalNcolumns){
+// Looks like this
+//   _________
+//  |_|_|_|_|_|
+//  |_|_|x|_|_|
+//
+//If i want the icon in the "x" position: @include svg-sprite(3,2)
+//$globalGridSize it's the natural size of one square in the sprite
+//If i want a custom size i use @include svg-sprite(3,2,130px)
+//Use "no-extend" if the mixin is inside a @media (sass can't extend in media queries)
+ 
+@mixin svg-sprite($xPosition,
+                  $yPosition,
+                  $unitGridSize:$globalGridSize,
+                  $extend:'extend',
+                  $image:'mainSprite',
+                  $nColumns:$globalNcolumns){
+
   $widthOfSprite: ($unitGridSize * $nColumns);
 
   @if $unitGridSize == $globalGridSize{
@@ -94,6 +110,9 @@
   }
 }
 
+//===========================
+//      TRANSLATE CENTER
+//===========================
 
 @mixin translate-center(){
   @include absolute(top 50% left 50%);
