@@ -7,7 +7,6 @@ var gulp = require('gulp'),
 	gulpif = require('gulp-if'),
 	minimist = require('minimist'),
 	config = require('./config');
-
 var knownOptions = {
   string: 'env',
   default: { env: process.env.NODE_ENV || 'development' }
@@ -47,13 +46,15 @@ gulp.task('sass', function(){
 //-----------------------//
 //		   JADE
 //-----------------------//
+function prodJadeConfig(){return config.sass.sassConfigProd}
+function devJadeConfig() {return config.sass.sassConfigDev}
 
 gulp.task('jade', function() {
-	gulp.src(['development/templates/**/*.jade','!development/templates/**/_*.jade'])
+	gulp.src(config.jade.src)
 		.pipe(jade({
-			pretty: true
+			pretty: true,
 		}))
-		.pipe(gulp.dest('production'))
+		.pipe(gulp.dest(config.jade.dest))
 		.pipe(connect.reload())
 });
 
@@ -80,4 +81,4 @@ gulp.task('autoprefixer', function () {
 
 
 //-----------------------------//
-gulp.task('default', ['sass'])
+gulp.task('default', ['connect','watch'])

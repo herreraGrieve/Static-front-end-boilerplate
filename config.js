@@ -13,5 +13,15 @@ module.exports = {
 	  	require: ['susy','breakpoint'],
 	  	style: 'expanded'
 	  }
+	},
+	jade : {
+		src: ['development/templates/pages/*.jade','!development/templates/**/_*.jade'],
+		dest: output_Directory,
+		jadeConfigProd: {
+			pretty: false
+		},
+		jadeConfigDev: {
+			pretty: true
+		}
 	}
 }
