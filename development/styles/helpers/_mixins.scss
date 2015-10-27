@@ -7,6 +7,28 @@
       height: $height;
 }
 
+//===========================
+//   GHOST VERTICAL CENTER
+//===========================
+
+@mixin vCenter($origin) {
+      @if $origin == 'parent'{
+        &:before{
+          content: "";
+          display: inline-block;
+          position: relative;
+          width: 0;
+          height: 100%;
+          margin-left: -0.25em;
+          //
+          vertical-align: middle;
+        }
+      }
+      @else if $origin == 'child'{
+        display: inline-block;
+        vertical-align: middle;
+      }
+}
 
 //===========================
 //     POSITION MIXIN
